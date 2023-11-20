@@ -5,6 +5,9 @@
 
 package com.mycompany.equipo13;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 /**
  *
  * Mejorada Soto Jose Javier
@@ -17,8 +20,19 @@ public class App {
     }
     public static int MENU_PRINCIPAL(){
         int op=0;
-        System.out.println("MENU DE OPCIONES:");
-        
+        BufferedReader leer=new BufferedReader(new InputStreamReader (System.in));
+        try{
+         System.out.println("MENU DE OPCIONES:");
+        System.out.println("1.- Agregar sucursales");
+        System.out.println("2.- Eliminar Sucursales");
+        System.out.println("3.- Desplegar sucursales en orden alfabetico");
+        System.out.println("4.- Menu de pedidos de una sucursal");
+        System.out.println("5.- Desplegar sucursales");
+        System.out.println("6.- Salir del menu");
+        op=Integer.parseInt(leer.readLine());   
+        }catch(Exception e){
+            System.out.println("Error opcion no valida");
+        }
         
         return op;
     }
