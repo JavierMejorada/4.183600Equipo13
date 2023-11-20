@@ -17,7 +17,7 @@ public class App {
     }
     public static int MENU_PRINCIPAL(){
         int op=0;
-        
+        System.out.println("MENU DE OPCIONES:");
         
         
         return op;
