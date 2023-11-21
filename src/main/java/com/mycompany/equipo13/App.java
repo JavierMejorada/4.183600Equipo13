@@ -29,7 +29,7 @@ public class App {
         System.out.println("4.- Menu de pedidos de una sucursal");
         System.out.println("5.- Desplegar sucursales");
         System.out.println("6.- Salir del menu");
-            System.out.println("EMMA TONTO");
+        
         op=Integer.parseInt(leer.readLine());   
         }catch(Exception e){
             System.out.println("Error opcion no valida");
