@@ -22,14 +22,15 @@ public class App {
         int op=0;
         BufferedReader leer=new BufferedReader(new InputStreamReader (System.in));
         try{
-         System.out.println("MENU DE OPCIONES:");
+        System.out.println("MENU DE OPCIONES:");
         System.out.println("1.- Agregar sucursales");
         System.out.println("2.- Eliminar Sucursales");
         System.out.println("3.- Desplegar sucursales en orden alfabetico");
         System.out.println("4.- Menu de pedidos de una sucursal");
         System.out.println("5.- Desplegar sucursales");
         System.out.println("6.- Salir del menu");
-        
+        System.out.println("PRUEBA COMMIT");
+        String nueva_variable = "xd";
         op=Integer.parseInt(leer.readLine());   
         }catch(Exception e){
             System.out.println("Error opcion no valida");
