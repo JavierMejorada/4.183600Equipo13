@@ -16,7 +16,7 @@ import listaD.PEDIDO;
  * Mejorada Soto Jose Javier Vallejo Ramirez Emmanuel
  */
 public class App {
-
+    
     public static void main(String[] args) {
         System.out.println("PROYECTO TEMA NO.4");
         BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
@@ -37,21 +37,21 @@ public class App {
                         String nombre = leer.readLine();
                         Sucursal pp = suc.busqueda(nombre, suc.getRaiz(), null);
                         if (pp != null) {
-                            System.out.println("La empresa es: "+pp.getNombre());
-                            if (pp.getPedidos()==null) {
+                            System.out.println("La empresa es: " + pp.getNombre());
+                            if (pp.getPedidos() == null) {
                                 suc.remove(nombre);
                                 System.out.println("Ha sido eliminada");
-                            }else{
+                            } else {
                                 System.out.println("Esta empresa tiene pedidos , por lo tanto no se puede eliminar");
                             }
-
+                            
                         } else {
                             System.out.println("Esa empresa no se encuentra");
                         }
-
+                        
                         break;
                     case 3:
-
+                        suc.preorden(suc.getRaiz());
                         break;
                     case 4:
                         Lista_doble Lista = new Lista_doble();
@@ -59,7 +59,7 @@ public class App {
                             op2 = menuPedidos();
                             switch (op2) {
                                 case 1:
-
+                                    
                                     break;
                                 case 2:
                                     if (Lista.empty()) {
@@ -82,7 +82,7 @@ public class App {
                                     } else {
                                         System.out.println("No hay pedidos en la lista");
                                     }
-
+                                    
                                     break;
                                 case 4:
                                     if (!Lista.empty()) {
@@ -97,7 +97,7 @@ public class App {
                                     } else {
                                         System.out.println("No hay pedidos en la lista");
                                     }
-
+                                    
                                     break;
                                 case 0:
                                     System.out.println("!HASTA LUEGO!");
@@ -110,7 +110,7 @@ public class App {
                         break;
                     case 5:
                         System.out.println("Desplegar sucursales por orden alfabetico:");
-
+                        
                         break;
                     case 6:
                         System.out.println("Gracias por usar el programa");
@@ -124,7 +124,7 @@ public class App {
             System.out.println("Error: " + e);
         }
     }
-
+    
     public static int menuPrincipal() {
         int op = 0;
         BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
@@ -142,7 +142,7 @@ public class App {
         }
         return op;
     }
-
+    
     public static int menuPedidos() {
         int op = -1;
         try {
@@ -163,7 +163,7 @@ public class App {
         }
         return op;
     }
-
+    
     public static void insertarEmpresa(Arbol Lista) {
         try {
             BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
@@ -172,14 +172,14 @@ public class App {
             Sucursal pp = Lista.busqueda(nombre, Lista.getRaiz(), null);
             if (pp != null) {
                 System.out.println("El nombre de la empresa ya se encuentra");
-
+                
             } else {
                 System.out.println("Ingrese la zona geografica:");
                 char zona = leer.readLine().charAt(0);
                 Sucursal suc = new Sucursal(nombre, zona);
                 Lista.insert(suc);
             }
-
+            
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }

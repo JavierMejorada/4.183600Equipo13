@@ -154,5 +154,18 @@ public class Arbol {
         }
         return hijo;
     }
+     public void preorden(Sucursal nodo)
+    {
+        if (nodo != null)
+        {
+            System.out.println("---------------------");
+            System.out.println(nodo.getNombre());
+            System.out.println(nodo.getZona());
+            System.out.println(nodo.getVentas());
+            System.out.println("---------------------");
+            preorden(nodo.getHizq());
+            preorden(nodo.getHder());
+        }
+    }
     
 }
