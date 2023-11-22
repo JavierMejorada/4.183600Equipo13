@@ -45,5 +45,16 @@ public class Arbol {
             }while(aux.getHder() != nodo && aux.getHizq()!= nodo);
         }
     }
+     public Sucursal busqueda(String nombre,Sucursal nodo,Sucursal dev){
+        if (nodo!=null) {
+            if (nodo.getNombre().equals(nombre)) {
+                dev=nodo;
+            }
+            dev=busqueda(nombre,nodo.getHizq(),dev);
+            dev=busqueda(nombre,nodo.getHder(),dev);
+            
+        }
+        return dev;
+    }
     
 }

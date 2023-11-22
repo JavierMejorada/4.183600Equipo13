@@ -13,8 +13,7 @@ import listaD.PEDIDO;
 
 /**
  *
- * Mejorada Soto Jose Javier
- * Vallejo Ramirez Emmanuel
+ * Mejorada Soto Jose Javier Vallejo Ramirez Emmanuel
  */
 public class App {
 
@@ -22,12 +21,14 @@ public class App {
         System.out.println("PROYECTO TEMA NO.4");
         BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
         int op, op2;
+         Arbol suc = new Arbol();
         try {
             do {
                 op = menuPrincipal();
                 switch (op) {
                     case 1:
-
+                       
+                        insertarEmpresa(suc);
                         break;
                     case 2:
 
@@ -41,7 +42,7 @@ public class App {
                             op2 = menuPedidos();
                             switch (op2) {
                                 case 1:
-                                    insertarPedido(Lista);
+
                                     break;
                                 case 2:
                                     if (Lista.empty()) {
@@ -91,6 +92,7 @@ public class App {
                         } while (op2 != 0);
                         break;
                     case 5:
+                        System.out.println("Desplegar sucursales por orden alfabetico:");
 
                         break;
                     case 6:
@@ -145,30 +147,22 @@ public class App {
         return op;
     }
 
-    public static void insertarPedido(Lista_doble Lista) {
+    public static void insertarEmpresa(Arbol Lista) {
         try {
             BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
-            short numPedido, numCliente;
-            String pedido;
-            double importe;
-            System.out.println("------------------------------");
-            System.out.println("Agregando pedido");
-            System.out.println("Ingrese el número de pedido:");
-            numPedido = Short.parseShort(leer.readLine());
-            if (Lista.busquedaPedido(numPedido) == null) {
-                System.out.println("Ingrese el importe:");
-                importe = Short.parseShort(leer.readLine());
-                System.out.println("Ingrese el nombre del producto");
-                pedido = leer.readLine();
-                System.out.println("Ingrese el numero de cliente");
-                numCliente = Short.parseShort(leer.readLine());
-                PEDIDO Pedido = new PEDIDO(numPedido, importe, pedido, numCliente);
-                NODO_DOBLE ob = new NODO_DOBLE(Pedido);
-                Lista.insert(ob);
-                System.out.println("Pedido agregado con exito");
+            System.out.println("Ingrese el nombre de la sucursal que desea agregar: ");
+            String nombre = leer.readLine().toUpperCase();
+            Sucursal pp = Lista.busqueda(nombre, Lista.getRaiz(), null);
+            if (pp != null) {
+                System.out.println("El nombre de la empresa ya se encuentra");
+
             } else {
-                System.out.println("Ya hay un pedido con ese numero");
+                System.out.println("Ingrese la zona geografica:");
+                char zona = leer.readLine().charAt(0);
+                Sucursal suc = new Sucursal(nombre, zona);
+                Lista.insert(suc);
             }
+
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
