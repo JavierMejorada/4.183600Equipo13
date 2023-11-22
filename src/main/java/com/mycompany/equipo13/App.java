@@ -21,16 +21,33 @@ public class App {
         System.out.println("PROYECTO TEMA NO.4");
         BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
         int op, op2;
-         Arbol suc = new Arbol();
+        Arbol suc = new Arbol();
         try {
             do {
                 op = menuPrincipal();
                 switch (op) {
                     case 1:
-                       
                         insertarEmpresa(suc);
                         break;
                     case 2:
+                        System.out.println("Ingreso a eliminar una sucursal:");
+                        System.out.println("Considere que eliminara solo las que no tienen pedidos ;)");
+                        System.out.println("----------------------------");
+                        System.out.println("Ingrese el nombre de la empresa a eliminar:");
+                        String nombre = leer.readLine();
+                        Sucursal pp = suc.busqueda(nombre, suc.getRaiz(), null);
+                        if (pp != null) {
+                            System.out.println("La empresa es: "+pp.getNombre());
+                            if (pp.getPedidos()==null) {
+                                suc.remove(nombre);
+                                System.out.println("Ha sido eliminada");
+                            }else{
+                                System.out.println("Esta empresa tiene pedidos , por lo tanto no se puede eliminar");
+                            }
+
+                        } else {
+                            System.out.println("Esa empresa no se encuentra");
+                        }
 
                         break;
                     case 3:
