@@ -84,7 +84,7 @@ public class App {
                                                 System.out.println("Ingresa el numero de pedido que desea eliminar");
                                                 Short num = Short.parseShort(leer.readLine());
                                                 NODO_DOBLE elim = aux.getPedidos().eliminar(num);
-                                                if (aux == null) {
+                                                if (elim == null) {
                                                     System.out.println("No se encontro el pedido");
                                                 } else {
                                                     System.out.println("El pedido numero " + elim.getPedido().getNum_pedido() + " ha sido eliminado");
@@ -94,6 +94,7 @@ public class App {
                                         case 3:
                                             if (!aux.getPedidos().empty()) {
                                                 System.out.println("LISTA DE PEDIDOS:");
+                                                System.out.println("Nombre de la sucursal: "+aux.getNombre());
                                                 aux.getPedidos().desplegar(aux.getPedidos());
                                             } else {
                                                 System.out.println("No hay pedidos en la lista");
@@ -106,7 +107,7 @@ public class App {
                                                 System.out.println("-------------------------------------");
                                                 aux.getPedidos().desplegar(aux.getPedidos());
                                                 System.out.println("-------------------------------------");
-                                                System.out.println("ingrese el numero del pedido que desea eliminar:");
+                                                System.out.println("ingrese el numero del pedido que desea modificar:");
                                                 Short num = Short.parseShort(leer.readLine());
                                                 aux.getPedidos().modificar(num, aux.getPedidos());
                                             } else {

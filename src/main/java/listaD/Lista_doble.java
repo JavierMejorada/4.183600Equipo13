@@ -66,9 +66,9 @@ public class Lista_doble {
 
     public void desplegar(Lista_doble Lista) {
         NODO_DOBLE aux = getUlt();
-        System.out.println("-------------- LISTADO DE SUCURSALES -------------");
+        System.out.println("-------------- LISTADO DE PEDIDOS -------------");
         while (aux != null) {
-            System.out.println("Nombre de la sucursal: ");
+            
             System.out.println("Importe: " + aux.getPedido().getImporte());
             System.out.println("Producto: " + aux.getPedido().getProducto());
             System.out.println("Numero de cliente: " + aux.getPedido().getNum_cliente());
