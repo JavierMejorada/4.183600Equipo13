@@ -130,7 +130,7 @@ public class App {
                         break;
                     case 5:
                         System.out.println("LISTA DE SUCURSALES (POR CODIGO DE ESTADO)");
-                        //TERMINAR
+                        
                         break;
                     case 6:
                         System.out.println("Gracias por usar el programa");
@@ -232,4 +232,5 @@ public class App {
             System.out.println("Error: " + e);
         }
     }
+   
 }
