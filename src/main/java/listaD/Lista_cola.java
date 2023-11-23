@@ -4,29 +4,53 @@
  */
 package listaD;
 
+import com.mycompany.equipo13.Sucursal;
+import com.mycompany.equipo13.Arbol;
+
 /**
  *
  * @author Usuario
  */
 public class Lista_cola {
-    private NODO_DOBLE ant, sig;
 
-    public NODO_DOBLE getAnt() {
-        return ant;
+   private Sucursal info;
+   private Lista_cola sig,ant;
+
+    public Lista_cola(Sucursal info) {
+        this.info = info;
+        this.sig = null;
+        this.ant = null;
+    }
+   
+
+    public Sucursal getInfo() {
+        return info;
     }
 
-    public void setAnt(NODO_DOBLE ant) {
-        this.ant = ant;
+    public void setInfo(Sucursal info) {
+        this.info = info;
     }
 
-    public NODO_DOBLE getSig() {
+    public Lista_cola getSig() {
         return sig;
     }
 
-    public void setSig(NODO_DOBLE sig) {
+    public void setSig(Lista_cola sig) {
         this.sig = sig;
     }
-    
-    
+
+    public Lista_cola getAnt() {
+        return ant;
+    }
+
+    public void setAnt(Lista_cola ant) {
+        this.ant = ant;
+    }
+
    
+   
+
+
+    
+
 }

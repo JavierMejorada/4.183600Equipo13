@@ -4,6 +4,10 @@
  */
 package com.mycompany.equipo13;
 
+import listaD.Lista_cola;
+import listaD.Lista_doble;
+import listaD.NODO_DOBLE;
+
 
 /**
  *
@@ -12,6 +16,7 @@ package com.mycompany.equipo13;
 public class Arbol {
 
     private Sucursal raiz;
+   
 
     public Sucursal getRaiz() {
         return raiz;
@@ -20,6 +25,9 @@ public class Arbol {
     public void setRaiz(Sucursal raiz) {
         this.raiz = raiz;
     }
+
+  
+    
 
     public boolean empty() {
         if (getRaiz() == null) {
@@ -52,6 +60,7 @@ public class Arbol {
             } while (aux.getHder() != nodo && aux.getHizq() != nodo);
         }
         nodo.setNivel(conta);
+       
     }
 
     public Sucursal busqueda(String nombre, Sucursal nodo, Sucursal dev) {
@@ -172,5 +181,15 @@ public class Arbol {
         }
         return aux;
     }
-     
+    public void DesplegarANCH(Sucursal PO){
+        Lista_doble pp=new Lista_doble();
+        Lista_cola aux=new Lista_cola();
+        
+        
+        pp.insert(aux);
+        while(!pp.empty()){
+            
+        }
+    }
+   
 }
