@@ -12,105 +12,121 @@ import listaD.NODO_DOBLE;
 import listaD.PEDIDO;
 
 /**
- *
- * Mejorada Soto Jose Javier Vallejo Ramirez Emmanuel
+ * Mejorada Soto Jose Javier 
+ * Vallejo Ramirez Emmanuel
  */
 public class App {
-    
+
     public static void main(String[] args) {
         System.out.println("PROYECTO TEMA NO.4");
         BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
         int op, op2;
-        Arbol suc = new Arbol();
+        Arbol arbol = new Arbol();
         try {
             do {
                 op = menuPrincipal();
                 switch (op) {
                     case 1:
-                        insertarEmpresa(suc);
+                        insertarEmpresa(arbol);
                         break;
                     case 2:
-                        System.out.println("Ingreso a eliminar una sucursal:");
-                        System.out.println("Considere que eliminara solo las que no tienen pedidos ;)");
-                        System.out.println("----------------------------");
-                        System.out.println("Ingrese el nombre de la empresa a eliminar:");
-                        String nombre = leer.readLine();
-                        Sucursal pp = suc.busqueda(nombre, suc.getRaiz(), null);
-                        if (pp != null) {
-                            System.out.println("La empresa es: " + pp.getNombre());
-                            if (pp.getPedidos() == null) {
-                                suc.remove(nombre);
-                                System.out.println("Ha sido eliminada");
+                        if(!arbol.empty()){
+                            System.out.println("Ingreso a eliminar una sucursal:");
+                            System.out.println("(Considere que eliminara solo las que no tienen pedidos)");
+                            System.out.println("--------------------------------------------");
+                            System.out.println("Ingrese el nombre de la empresa a eliminar:");
+                            String nombre = leer.readLine();
+                            Sucursal pp = arbol.busqueda(nombre, arbol.getRaiz(), null);
+                            if (pp != null) {
+                                System.out.println("Sucursal '" + pp.getNombre() + "' encontrada");
+                                if (pp.getPedidos() == null) {
+                                    arbol.remove(nombre);
+                                    System.out.println("La sucursal '" + pp.getNombre() + "' ha sido eliminada");
+                                } else {
+                                    System.out.println("Esta empresa tiene pedidos, por lo tanto no se puede eliminar");
+                                }
                             } else {
-                                System.out.println("Esta empresa tiene pedidos , por lo tanto no se puede eliminar");
+                                System.out.println("Esa empresa no se encuentra");
                             }
-                            
-                        } else {
-                            System.out.println("Esa empresa no se encuentra");
-                        }
-                        
+                        } else 
+                            System.out.println("No hay sucursales agregadas\n");
                         break;
                     case 3:
-                        suc.preorden(suc.getRaiz());
+                        if (arbol.empty()) {
+                            System.out.println("No hay sucursales agregadas\n");
+                        } else {
+                            System.out.println("\nLISTA DE SUCURSALES (ORDEN ALFABETICO)");
+                            arbol.desplegarAlf(arbol.getRaiz());
+                        }
                         break;
                     case 4:
-                        Lista_doble Lista = new Lista_doble();
-                        do {
-                            op2 = menuPedidos();
-                            switch (op2) {
-                                case 1:
-                                    
-                                    break;
-                                case 2:
-                                    if (Lista.empty()) {
-                                        System.out.println("No hay pedidos en la lista");
-                                    } else {
-                                        System.out.println("Ingresa el numero de pedido que desea eliminar");
-                                        Short num = Short.parseShort(leer.readLine());
-                                        NODO_DOBLE aux = Lista.eliminar(num);
-                                        if (aux == null) {
-                                            System.out.println("No se encontro el pedido");
-                                        } else {
-                                            System.out.println("El pedido numero " + aux.getPedido().getNum_pedido() + " ha sido eliminado");
-                                        }
+                        if (arbol.empty()) {
+                            System.out.println("No hay sucursales agregadas\n");
+                        } else {
+                            System.out.println("Ingrese el nombre de la sucursal para acceder a sus pedidos");
+                            String buscar = leer.readLine().toUpperCase();
+                            Sucursal aux = arbol.busquedaNombre(arbol.getRaiz(), null, buscar);
+                            if (aux == null) {
+                                System.out.println("No se encontro la sucursal\n");
+                            } else {
+                                System.out.println("Coincidencia de nombre encontrada");
+                                do {
+                                    System.out.println("-------------- MENU SUCURSAL '" + aux.getNombre() + "' --------------");
+                                    op2 = menuPedidos();
+                                    switch (op2) {
+                                        case 1:
+                                            insertarPedido(aux.getPedidos());
+                                            break;
+                                        case 2:
+                                            if (aux.getPedidos().empty()) {
+                                                System.out.println("No hay pedidos en la lista");
+                                            } else {
+                                                System.out.println("Ingresa el numero de pedido que desea eliminar");
+                                                Short num = Short.parseShort(leer.readLine());
+                                                NODO_DOBLE elim = aux.getPedidos().eliminar(num);
+                                                if (aux == null) {
+                                                    System.out.println("No se encontro el pedido");
+                                                } else {
+                                                    System.out.println("El pedido numero " + elim.getPedido().getNum_pedido() + " ha sido eliminado");
+                                                }
+                                            }
+                                            break;
+                                        case 3:
+                                            if (!aux.getPedidos().empty()) {
+                                                System.out.println("LISTA DE PEDIDOS:");
+                                                aux.getPedidos().desplegar(aux.getPedidos());
+                                            } else {
+                                                System.out.println("No hay pedidos en la lista");
+                                            }
+                                            break;
+                                        case 4:
+                                            if (!aux.getPedidos().empty()) {
+                                                System.out.println("Consultar un pedido con cambio de datos:");
+                                                System.out.println("A continuacion se muestran todos los pedidos:");
+                                                System.out.println("-------------------------------------");
+                                                aux.getPedidos().desplegar(aux.getPedidos());
+                                                System.out.println("-------------------------------------");
+                                                System.out.println("ingrese el numero del pedido que desea eliminar:");
+                                                Short num = Short.parseShort(leer.readLine());
+                                                aux.getPedidos().modificar(num, aux.getPedidos());
+                                            } else {
+                                                System.out.println("No hay pedidos en la lista\n");
+                                            }
+                                            break;
+                                        case 0:
+                                            System.out.println("Regresando al menu...\n");
+                                            break;
+                                        default:
+                                            System.out.println("Ingrese una opcion valida\n");
+                                            break;
                                     }
-                                    break;
-                                case 3:
-                                    if (!Lista.empty()) {
-                                        System.out.println("DESPLEGAR");
-                                        Lista.desplegar(Lista);
-                                    } else {
-                                        System.out.println("No hay pedidos en la lista");
-                                    }
-                                    
-                                    break;
-                                case 4:
-                                    if (!Lista.empty()) {
-                                        System.out.println("Consultar un pedido con cambio de datos:");
-                                        System.out.println("A continuacion se muestran todos los pedidos:");
-                                        System.out.println("-------------------------------------");
-                                        Lista.desplegar(Lista);
-                                        System.out.println("-------------------------------------");
-                                        System.out.println("ingrese el numero del pedido que desea eliminar:");
-                                        Short num = Short.parseShort(leer.readLine());
-                                        Lista.modificar(num, Lista);
-                                    } else {
-                                        System.out.println("No hay pedidos en la lista");
-                                    }
-                                    
-                                    break;
-                                case 0:
-                                    System.out.println("!HASTA LUEGO!");
-                                    break;
-                                default:
-                                    System.out.println("Ingrese una opcion valida");
-                                    break;
+                                } while (op2 != 0);
                             }
-                        } while (op2 != 0);
+                        }
                         break;
                     case 5:
-                        System.out.println("Desplegar sucursales por orden alfabetico:");
-                        
+                        System.out.println("LISTA DE SUCURSALES (POR CODIGO DE ESTADO)");
+                        //TERMINAR
                         break;
                     case 6:
                         System.out.println("Gracias por usar el programa");
@@ -124,7 +140,7 @@ public class App {
             System.out.println("Error: " + e);
         }
     }
-    
+
     public static int menuPrincipal() {
         int op = 0;
         BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
@@ -136,26 +152,23 @@ public class App {
             System.out.println("4.- Menu de pedidos de una Sucursal");
             System.out.println("5.- Desplegar Sucursales por codigo de estado");
             System.out.println("6.- Salir");
+            System.out.println("\nIngrese una opcion:");
             op = Integer.parseInt(leer.readLine());
         } catch (Exception e) {
             System.out.println("ERROR: " + e);
         }
         return op;
     }
-    
+
     public static int menuPedidos() {
         int op = -1;
         try {
             BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("-------------- AGRICHEM S.A de C.V --------------");
-            System.out.println("Empresa 100% Mexicana");
-            System.out.println("¿En que podemos ayudarte el dia de hoy?");
-            System.out.println("-------------------------------------------------");
             System.out.println("1. Agregar un pedido");
             System.out.println("2. Eliminar algun pedido en especifico");
             System.out.println("3. Desplegar el listado de tus pedidos");
             System.out.println("4. Consultar un pedido con opcion a cambio de datos");
-            System.out.println("0. SALIR");
+            System.out.println("0. REGRESAR AL MENU PRINCIPAL");
             System.out.println("\nElije una de nuestras opciones");
             op = Integer.parseInt(leer.readLine());
         } catch (Exception e) {
@@ -163,23 +176,53 @@ public class App {
         }
         return op;
     }
-    
-    public static void insertarEmpresa(Arbol Lista) {
+
+    public static void insertarEmpresa(Arbol arbol) {
         try {
             BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Ingrese el nombre de la sucursal que desea agregar: ");
             String nombre = leer.readLine().toUpperCase();
-            Sucursal pp = Lista.busqueda(nombre, Lista.getRaiz(), null);
+            Sucursal pp = arbol.busqueda(nombre, arbol.getRaiz(), null);
             if (pp != null) {
                 System.out.println("El nombre de la empresa ya se encuentra");
-                
             } else {
                 System.out.println("Ingrese la zona geografica:");
-                char zona = leer.readLine().charAt(0);
+                char zona = leer.readLine().toUpperCase().charAt(0);
                 Sucursal suc = new Sucursal(nombre, zona);
-                Lista.insert(suc);
+                arbol.insert(suc);
+                System.out.println("Sucursal '" + suc.getNombre() + "' insertada con exito");
+                System.out.println("Zona geografica: " + suc.getZona());
+                System.out.println("Nivel: " + suc.getNivel() + "\n");
             }
-            
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+    }
+    public static void insertarPedido(Lista_doble Lista){
+        try {
+            BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
+            short numPedido, numCliente;
+            String pedido;
+            double importe;
+            System.out.println("------------------------------");
+            System.out.println("Agregando pedido");
+            System.out.println("Ingrese el número de pedido:");
+            numPedido = Short.parseShort(leer.readLine());
+            if (Lista.busquedaPedido(numPedido) == null) {
+                System.out.println("Ingrese el importe:");
+                importe = Short.parseShort(leer.readLine());
+                System.out.println("Ingrese el nombre del producto");
+                pedido = leer.readLine();
+                System.out.println("Ingrese el numero de cliente");
+                numCliente = Short.parseShort(leer.readLine());
+                PEDIDO Pedido = new PEDIDO(numPedido, importe, pedido, numCliente);
+                NODO_DOBLE ob = new NODO_DOBLE(Pedido);
+                Lista.insert(ob);
+                System.out.println("Pedido agregado con exito");
+            } else {
+                System.out.println("Ya hay un pedido con ese numero");
+            }
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
