@@ -75,7 +75,7 @@ public class App {
                                     op2 = menuPedidos();
                                     switch (op2) {
                                         case 1:
-                                            insertarPedido(aux.getPedidos());
+                                            insertarPedido(aux.getPedidos(),aux);
                                             break;
                                         case 2:
                                             if (aux.getPedidos().empty()) {
@@ -84,10 +84,12 @@ public class App {
                                                 System.out.println("Ingresa el numero de pedido que desea eliminar");
                                                 Short num = Short.parseShort(leer.readLine());
                                                 NODO_DOBLE elim = aux.getPedidos().eliminar(num);
+                                                
                                                 if (elim == null) {
                                                     System.out.println("No se encontro el pedido");
                                                 } else {
                                                     System.out.println("El pedido numero " + elim.getPedido().getNum_pedido() + " ha sido eliminado");
+                                                    aux.setVentas(aux.getVentas()-elim.getPedido().getImporte());
                                                 }
                                             }
                                             break;
@@ -109,6 +111,7 @@ public class App {
                                                 System.out.println("-------------------------------------");
                                                 System.out.println("ingrese el numero del pedido que desea modificar:");
                                                 Short num = Short.parseShort(leer.readLine());
+                                                
                                                 aux.getPedidos().modificar(num, aux.getPedidos());
                                             } else {
                                                 System.out.println("No hay pedidos en la lista\n");
@@ -200,7 +203,7 @@ public class App {
             System.out.println("Error: " + e);
         }
     }
-    public static void insertarPedido(Lista_doble Lista){
+    public static void insertarPedido(Lista_doble Lista,Sucursal a){
         try {
             BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
             short numPedido, numCliente;
@@ -213,6 +216,7 @@ public class App {
             if (Lista.busquedaPedido(numPedido) == null) {
                 System.out.println("Ingrese el importe:");
                 importe = Short.parseShort(leer.readLine());
+                a.setVentas(a.getVentas()+importe);
                 System.out.println("Ingrese el nombre del producto");
                 pedido = leer.readLine();
                 System.out.println("Ingrese el numero de cliente");
