@@ -49,7 +49,7 @@ public class clase_aux {
 
     public Lista_cola elimve() {
         Lista_cola elim = getCom();
-        if (getCom().getSig() == null && getCom().getAnt() == null) {
+        if (getCom().getSig() == null) {
             setCom(null);
             setFl(null);
         } else {
