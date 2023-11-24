@@ -48,27 +48,17 @@ public class clase_aux {
     }
 
     public Lista_cola elimve() {
-        Lista_cola elim = getCom();
+        Lista_cola lc = getCom();
         if (getCom().getSig() == null) {
             setCom(null);
             setFl(null);
         } else {
-            elim.getSig().setAnt(null);
-            setCom(elim.getSig());
+            lc.getSig().setAnt(null);
+            setCom(lc.getSig());
         }
-        return elim;
+        return lc;
     }
 
-    public Lista_cola elim() {
-        Lista_cola pp = getCom();
-        if (!empty()) {
-
-            pp.getSig().setAnt(null);
-            setCom(pp.getSig());
-
-        }
-        return pp;
-
-    }
+    
 
 }
