@@ -7,7 +7,7 @@ package com.mycompany.equipo13;
 import listaD.Lista_cola;
 import listaD.Lista_doble;
 import listaD.NODO_DOBLE;
-
+import listaD.clase_aux;
 
 /**
  *
@@ -16,7 +16,6 @@ import listaD.NODO_DOBLE;
 public class Arbol {
 
     private Sucursal raiz;
-   
 
     public Sucursal getRaiz() {
         return raiz;
@@ -25,9 +24,6 @@ public class Arbol {
     public void setRaiz(Sucursal raiz) {
         this.raiz = raiz;
     }
-
-  
-    
 
     public boolean empty() {
         if (getRaiz() == null) {
@@ -60,7 +56,7 @@ public class Arbol {
             } while (aux.getHder() != nodo && aux.getHizq() != nodo);
         }
         nodo.setNivel(conta);
-       
+
     }
 
     public Sucursal busqueda(String nombre, Sucursal nodo, Sucursal dev) {
@@ -172,24 +168,49 @@ public class Arbol {
             desplegarAlf(nodo.getHder());
         }
     }
-    public Sucursal busquedaNombre(Sucursal nodo, Sucursal aux, String nombre){
-        if(nodo != null){
-            if(nodo.getNombre().equals(nombre))
+
+    public Sucursal busquedaNombre(Sucursal nodo, Sucursal aux, String nombre) {
+        if (nodo != null) {
+            if (nodo.getNombre().equals(nombre)) {
                 aux = nodo;
+            }
             aux = busquedaNombre(nodo.getHizq(), aux, nombre);
             aux = busquedaNombre(nodo.getHder(), aux, nombre);
         }
         return aux;
     }
-    public void DesplegarANCH(Sucursal PO){
-        Lista_doble pp=new Lista_doble();
-        Lista_cola aux=new Lista_cola();
-        
-        
-        pp.insert(aux);
-        while(!pp.empty()){
+
+    public void despliegueno2(Lista_cola nn) {
+        System.out.println("Despliegue en anchura");
+        System.out.println("**************************************");
+        System.out.println("Empresa: " + nn.getInfo().getNombre());
+        System.out.println("Ventas: " + nn.getInfo().getVentas());
+        System.out.println("Nivel: " + nn.getInfo().getNivel());
+        System.out.println("Zona:" + nn.getInfo().getZona());
+        System.out.println("*************************************");
+    }
+
+    public void DesplegarANCH(Sucursal PO) {
+        clase_aux pp = new clase_aux();
+        Lista_cola aux = new Lista_cola(PO);
+
+        pp.Insert(aux);
+        while (!pp.empty()) {
+            if (pp.getCom().getInfo().getHder() != null) {
+                aux = new Lista_cola(pp.getCom().getInfo().getHder());
+                pp.Insert(aux);
+            }
+            if (pp.getCom().getInfo().getHizq() != null) {
+                aux = new Lista_cola(pp.getCom().getInfo().getHizq());
+                pp.Insert(aux);
+            }
+
+            aux = pp.elim();
+               if (aux!=null) {
+                despliegueno2(aux);
+            }
             
         }
     }
-   
+
 }
