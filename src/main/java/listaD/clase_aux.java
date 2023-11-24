@@ -9,7 +9,8 @@ package listaD;
  * @author HP
  */
 public class clase_aux {
-      private Lista_cola com,fl;
+
+    private Lista_cola com, fl;
 
     public Lista_cola getCom() {
         return com;
@@ -26,35 +27,48 @@ public class clase_aux {
     public void setFl(Lista_cola fl) {
         this.fl = fl;
     }
-   
 
-    
-    public boolean empty(){
-        if(getCom()==null && getFl()==null){
+    public boolean empty() {
+        if (getCom() == null && getFl() == null) {
             return true;
         }
         return false;
     }
-    public void Insert(Lista_cola nodo){
-        if(empty()){
+
+    public void Insert(Lista_cola nodo) {
+        if (empty()) {
             setCom(nodo);
             setFl(nodo);
+        } else {
+            nodo.setAnt(getFl().getAnt());
+            getFl().setSig(nodo);
+            setFl(nodo);
         }
-        else{
-        nodo.setAnt(getFl().getAnt());
-        getFl().setSig(nodo);
-        setFl(nodo);
-        }
-        
-            
-        }
-    public Lista_cola elim(){
-        if (!empty()) {
-            getCom().getSig().setAnt(null);
-        setCom(getCom().getSig());
-        return getCom();
-        }
-        return null;
-        
+
     }
+
+    public Lista_cola elimve() {
+        Lista_cola elim = getCom();
+        if (getCom().getSig() == null && getCom().getAnt() == null) {
+            setCom(null);
+            setFl(null);
+        } else {
+            elim.getSig().setAnt(null);
+            setCom(elim.getSig());
+        }
+        return elim;
+    }
+
+    public Lista_cola elim() {
+        Lista_cola pp = getCom();
+        if (!empty()) {
+
+            pp.getSig().setAnt(null);
+            setCom(pp.getSig());
+
+        }
+        return pp;
+
+    }
+
 }

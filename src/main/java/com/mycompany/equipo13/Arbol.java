@@ -168,6 +168,15 @@ public class Arbol {
             desplegarAlf(nodo.getHder());
         }
     }
+     public void despliegueno2(Lista_cola nn) {
+        System.out.println("Despliegue en anchura");
+        System.out.println("**************************************");
+        System.out.println("Empresa: " + nn.getInfo().getNombre());
+        System.out.println("Ventas: " + nn.getInfo().getVentas());
+        System.out.println("Nivel: " + nn.getInfo().getNivel());
+        System.out.println("Zona:" + nn.getInfo().getZona());
+        System.out.println("*************************************");
+    }
 
     public Sucursal busquedaNombre(Sucursal nodo, Sucursal aux, String nombre) {
         if (nodo != null) {
@@ -180,20 +189,12 @@ public class Arbol {
         return aux;
     }
 
-    public void despliegueno2(Lista_cola nn) {
-        System.out.println("Despliegue en anchura");
-        System.out.println("**************************************");
-        System.out.println("Empresa: " + nn.getInfo().getNombre());
-        System.out.println("Ventas: " + nn.getInfo().getVentas());
-        System.out.println("Nivel: " + nn.getInfo().getNivel());
-        System.out.println("Zona:" + nn.getInfo().getZona());
-        System.out.println("*************************************");
-    }
+   
 
     public void DesplegarANCH(Sucursal PO) {
         clase_aux pp = new clase_aux();
         Lista_cola aux = new Lista_cola(PO);
-
+        despliegueno2(aux);
         pp.Insert(aux);
         while (!pp.empty()) {
             if (pp.getCom().getInfo().getHder() != null) {
@@ -205,11 +206,11 @@ public class Arbol {
                 pp.Insert(aux);
             }
 
-            aux = pp.elim();
-               if (aux!=null) {
+            aux = pp.elimve(); 
+            if (aux != null) {
                 despliegueno2(aux);
             }
-            
+
         }
     }
 

@@ -18,8 +18,7 @@ public class Lista_cola {
 
     public Lista_cola(Sucursal info) {
         this.info = info;
-        this.sig = null;
-        this.ant = null;
+       
     }
    
 
