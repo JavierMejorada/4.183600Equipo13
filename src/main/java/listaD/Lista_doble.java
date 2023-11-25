@@ -122,14 +122,14 @@ public class Lista_doble {
         return elim;
     }
 
-    public NODO_DOBLE modificar(short cad, Lista_doble lista) throws IOException {
+    public double modificar(short cad, Lista_doble lista) throws IOException {
         NODO_DOBLE elim = busquedaPedido(cad);
         BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
         short numPedido, numCliente;
         String pedido;
-        double importe;
+        double importe = 0.0;
         if (elim == null) {
-            return null;
+            return 0.0;
         } else {
             System.out.println("Que dato desea modificar del pedido numero " + cad);
 
@@ -147,6 +147,9 @@ public class Lista_doble {
                 case 1:
                     System.out.println("Ingrese el importe:");
                     importe = Double.parseDouble(leer.readLine());
+                    
+                    
+                    
                     elim.getPedido().setImporte(importe);
                     break;
                 case 2:
@@ -162,7 +165,7 @@ public class Lista_doble {
             }
 
         }
-        return elim;
+        return importe;
     }
 
 }

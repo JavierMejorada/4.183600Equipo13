@@ -4,16 +4,16 @@
  */
 package com.mycompany.equipo13;
 
-import listaD.Lista_cola;
+import listaD.ListaAnchura;
 import listaD.Lista_doble;
 import listaD.NODO_DOBLE;
-import listaD.clase_aux;
+import listaD.NodoAnchura;
 
 /**
  *
  * Mejorada Soto Jose Javier
  * Vallejo Ramirez Emmanuel
- * 
+ *
  */
 public class Arbol {
 
@@ -112,8 +112,10 @@ public class Arbol {
                 }
                 tem2.setHizq(tem.getHder());
                 aux2.setHder(tem);
+                nivelEliminar(tem.getHder());
                 tem.setHizq(aux.getHizq());
                 tem.setHder(aux.getHder());
+                tem.setNivel(aux.getNivel());
 
             }
         }
@@ -127,7 +129,7 @@ public class Arbol {
         } else {
             padre.setHder(null);
         }
-        
+
         return hijo;
     }
 
@@ -152,9 +154,9 @@ public class Arbol {
         return hijo;
     }
 
-    public void nivelEliminar(Sucursal nodo){
-        if(nodo != null){
-            nodo.setNivel(nodo.getNivel()-1);
+    public void nivelEliminar(Sucursal nodo) {
+        if (nodo != null) {
+            nodo.setNivel(nodo.getNivel() - 1);
             nivelEliminar(nodo.getHizq());
             nivelEliminar(nodo.getHder());
         }
@@ -170,15 +172,6 @@ public class Arbol {
             desplegarAlf(nodo.getHder());
         }
     }
-     public void despliegueno2(Lista_cola nn) {
-        System.out.println("Despliegue en anchura");
-        System.out.println("**************************************");
-        System.out.println("Empresa: " + nn.getInfo().getNombre());
-        System.out.println("Ventas: " + nn.getInfo().getVentas());
-        System.out.println("Nivel: " + nn.getInfo().getNivel());
-        System.out.println("Zona:" + nn.getInfo().getZona());
-        System.out.println("*************************************");
-    }
 
     public Sucursal busquedaNombre(Sucursal nodo, Sucursal aux, String nombre) {
         if (nodo != null) {
@@ -191,28 +184,26 @@ public class Arbol {
         return aux;
     }
 
-   
-
-    public void DesplegarANCH(Sucursal PO) {
-        clase_aux pp = new clase_aux();
-        Lista_cola aux = new Lista_cola(PO);
-        despliegueno2(aux);
-        pp.Insert(aux);
-        while (!pp.empty()) {
-            if (pp.getCom().getInfo().getHder() != null) {
-                aux = new Lista_cola(pp.getCom().getInfo().getHder());
-                pp.Insert(aux);
+    public void desplegarA(Sucursal nodo) {
+        ListaAnchura auxLista = new ListaAnchura();
+        NodoAnchura nodoA = new NodoAnchura(nodo);
+        auxLista.insert(nodoA);
+        System.out.println("LISTA DE SUCURSALES (POR CODIGO DE ESTADO)");
+        while (!auxLista.empty()) {
+            nodoA = auxLista.remove();
+            System.out.println("- Empresa: " + nodoA.getSucursal().getNombre());
+            System.out.println("- Ventas: " + nodoA.getSucursal().getVentas());
+            System.out.println("- Nivel: " + nodoA.getSucursal().getNivel());
+            System.out.println("- Zona:" + nodoA.getSucursal().getZona());
+            System.out.println("");
+            if(nodoA.getSucursal().getHizq() != null){
+                NodoAnchura nodoA_aux = new NodoAnchura(nodoA.getSucursal().getHizq());
+                auxLista.insert(nodoA_aux);
             }
-            if (pp.getCom().getInfo().getHizq() != null) {
-                aux = new Lista_cola(pp.getCom().getInfo().getHizq());
-                pp.Insert(aux);
+            if(nodoA.getSucursal().getHder() != null){
+                NodoAnchura nodoA_aux = new NodoAnchura(nodoA.getSucursal().getHder());
+                auxLista.insert(nodoA_aux);
             }
-
-            aux = pp.elimve(); 
-            if (aux != null) {
-                despliegueno2(aux);
-            }
-
         }
     }
 

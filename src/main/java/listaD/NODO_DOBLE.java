@@ -16,7 +16,6 @@ public class NODO_DOBLE
     public NODO_DOBLE(PEDIDO pedido){
         this.pedido = pedido;
         sig=ant=null;
-    
     }
 
     public PEDIDO getPedido(){
