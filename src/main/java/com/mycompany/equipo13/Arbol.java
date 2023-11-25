@@ -11,7 +11,9 @@ import listaD.clase_aux;
 
 /**
  *
- * @author Emmanuel V
+ * Mejorada Soto Jose Javier
+ * Vallejo Ramirez Emmanuel
+ * 
  */
 public class Arbol {
 
@@ -80,7 +82,6 @@ public class Arbol {
             } else {
                 aux = aux.getHder();
             }
-
         }
         if (aux == null) {
             return null;
@@ -96,6 +97,7 @@ public class Arbol {
             //Caso de dos hijos
             if (aux.getHder().getHizq() == null) {
                 aux.getHder().setHizq(aux.getHizq());
+                nivelEliminar(aux.getHder());
                 if (aux2.getHizq() == aux) {
                     aux2.setHizq(aux.getHder());
                 } else {
@@ -125,36 +127,36 @@ public class Arbol {
         } else {
             padre.setHder(null);
         }
+        
         return hijo;
-
     }
 
     public Sucursal eliminar_hijo(Sucursal hijo, Sucursal padre) {
         if (padre.getHizq() == hijo) {
             if (hijo.getHder() == null) {
                 padre.setHizq(hijo.getHizq());
+                nivelEliminar(hijo.getHizq());
             } else {
                 padre.setHizq(hijo.getHder());
+                nivelEliminar(hijo.getHder());
             }
         } else {
             if (hijo.getHizq() == null) {
                 padre.setHder(hijo.getHder());
+                nivelEliminar(hijo.getHder());
             } else {
                 padre.setHder(hijo.getHizq());
+                nivelEliminar(hijo.getHizq());
             }
         }
         return hijo;
     }
 
-    public void preorden(Sucursal nodo) {
-        if (nodo != null) {
-            System.out.println("---------------------");
-            System.out.println(nodo.getNombre());
-            System.out.println(nodo.getZona());
-            System.out.println(nodo.getVentas());
-            System.out.println("---------------------");
-            preorden(nodo.getHizq());
-            preorden(nodo.getHder());
+    public void nivelEliminar(Sucursal nodo){
+        if(nodo != null){
+            nodo.setNivel(nodo.getNivel()-1);
+            nivelEliminar(nodo.getHizq());
+            nivelEliminar(nodo.getHder());
         }
     }
 

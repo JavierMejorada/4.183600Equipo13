@@ -46,7 +46,7 @@ public class App {
                                     System.out.println("Esta empresa tiene pedidos, por lo tanto no se puede eliminar");
                                 }
                             } else {
-                                System.out.println("Esa empresa no se encuentra");
+                                System.out.println("Esa empresa no se encuentra\n");
                             }
                         } else 
                             System.out.println("No hay sucursales agregadas\n");
@@ -79,14 +79,14 @@ public class App {
                                             break;
                                         case 2:
                                             if (aux.getPedidos().empty()) {
-                                                System.out.println("No hay pedidos en la lista");
+                                                System.out.println("No hay pedidos en la lista\n");
                                             } else {
                                                 System.out.println("Ingresa el numero de pedido que desea eliminar");
                                                 Short num = Short.parseShort(leer.readLine());
                                                 NODO_DOBLE elim = aux.getPedidos().eliminar(num);
                                                 
                                                 if (elim == null) {
-                                                    System.out.println("No se encontro el pedido");
+                                                    System.out.println("No se encontro el pedido\n");
                                                 } else {
                                                     System.out.println("El pedido numero " + elim.getPedido().getNum_pedido() + " ha sido eliminado");
                                                     aux.setVentas(aux.getVentas()-elim.getPedido().getImporte());
